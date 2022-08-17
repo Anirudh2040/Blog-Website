@@ -45,7 +45,6 @@ app.get("/posts/:postId",function(req,res){
     res.render("post", {
      title: post.title,
      para: post.para
-
    });
   })
 })
@@ -55,8 +54,11 @@ app.post("/compose",function (req,res) {
     title : req.body.title,
     para : req.body.para
   })
-  post.save();
-  res.redirect("/");
+  post.save(function(err){
+    if (!err){
+        res.redirect("/");
+    }
+  });
 })
 
 
